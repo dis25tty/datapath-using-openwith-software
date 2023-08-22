@@ -9,21 +9,21 @@ if (!$con) {
     exit();
 }
 
-if (isset($_POST['login']) && isset($_POST['password'])) {
-    $login = $_POST['login'];
-    $pass = $_POST['password'];
+if (isset($_POST['email']) && isset($_POST['password'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-    if (empty($login) || empty($pass)) {
+    if (empty($email) || empty($password)) {
         header("Location: index.php?error=Login and Password are required");
         exit();
     }
 
     // Sanitize input (optional)
-    $login = mysqli_real_escape_string($con, $login);
-    $pass = mysqli_real_escape_string($con, $pass);
+    $email = mysqli_real_escape_string($con, $email);
+    $password = mysqli_real_escape_string($con, $password);
 
     // Database query
-    $sql = "SELECT * FROM USER_AUTH WHERE LOGIN = '$login' AND PASSWORD = '$pass'";
+    $sql = "SELECT * FROM USER WHERE email = '$email' AND PASSWORD = '$password'";
     $result = mysqli_query($con, $sql);
 
     // Check result
@@ -33,7 +33,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
         // Successful login
         $_SESSION['user_name'] = $row['user_name'];
         $_SESSION['name'] = $row['name'];
-        header("Location: datapath.html"); // Redirect to datapath.html
+        header("Location: datapath.php"); // Redirect to datapath.html
         exit();
     } else {
         // Failed login
