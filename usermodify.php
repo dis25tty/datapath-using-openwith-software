@@ -5,12 +5,12 @@ $con = mysqli_connect('localhost', 'root', '', 'datapath');
 // Check if the form was submitted for modifying a VLAN record
 
     // Get the VLANID and the modified values from the form
-$USERNAME = $_POST['username']; // Assuming your input field for VLAN_ID is named "VLAN_ID"
+$email = $_POST['username']; // Assuming your input field for VLAN_ID is named "VLAN_ID"
 
     $modifiedPassword = $_POST['modifiedPassword']; // Assuming your input field for bridge IP is named "modifiedBridgeIP"
- $modifiedEmail_ID = $_POST['modifiedEmail_ID']; 
+ $modifiedName = $_POST['modifiedEmail_ID']; 
 
-$fetchSql = "select * from `USER` where `USERNAME` = '$USERNAME'";
+$fetchSql = "select * from `USER` where `email` = '$email'";
 $result = mysqli_query($con, $fetchSql);
 
 if ($result) {
@@ -19,15 +19,15 @@ if ($result) {
 
         // Modify the fetched record with the new values
 	$userRecord['password'] = $modifiedPassword;
-$userRecord['email_id'] = $modifiedEmail_ID;
+$userRecord['firstname'] = $modifiedName;
 
 
 // Escape the modified values to prevent SQL injection
     $modifiedPassword = mysqli_real_escape_string($con, $modifiedPassword);
-     $modifiedEmail_ID = mysqli_real_escape_string($con, $modifiedEmail_ID);
+     $modifiedName = mysqli_real_escape_string($con, $modifiedName);
 
     // Database update SQL code
-    $updateSql = "UPDATE `USER` SET `PASSWORD` = '$modifiedPassword', `EMAIL_ID` = '$modifiedEmail_ID'  WHERE `USERNAME` = '$USERNAME' ";
+    $updateSql = "UPDATE `USER` SET `PASSWORD` = '$modifiedPassword', `firstname` = '$modifiedName'  WHERE `email` = '$email' ";
 
     // Update record in the database
     $rs = mysqli_query($con, $updateSql);

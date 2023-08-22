@@ -117,9 +117,9 @@ userview();
   <div class="content" id="userAddContent" >
  
   <!-- Add your user add form here -->
- 
+ <script></script>
   <H1 style="text-align: center;"><b> USER ADD </b></H1>
-  <form action = "user.php" method = "POST" >
+  <form action = "user.php" method = "POST" onSubmit={this.handleSubmit} >
 <br>
     <br>
  USERNAME :

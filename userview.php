@@ -15,9 +15,13 @@
 
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo "<tr>";
-                echo "<td>USERNAME:".$row['username']."</td><br>";
-                echo "<td>PASSWORD:".$row['password']."</td><br>";
-                 echo "<td>EMAIL-ID:".$row['email']."</td><br>";
+                echo "<td>Name            :".$row['firstname']." ".$row['lastname']."</td><br>";
+                echo "<td>PASSWORD        :".$row['password']."</td><br>";
+                 echo "<td>EMAIL-ID       :".$row['email']."</td><br>";
+                 echo "<td>Phone no       :".$row['phno']."</td><br>";
+                 echo "<td>Pincode        :".$row['pincode']."</td><br>";
+                 echo "<td>Area/Workstation:".$row['area_work']."</td><br>";
+                 echo "<td>Id             :".$row['id']."</td><br>";
                 echo "<br></tr><br>";
 
             }
