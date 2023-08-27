@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Database connection code
+// Database connection c
 $con = mysqli_connect('localhost', 'root', '', 'datapath');
 
 if (!$con) {
@@ -21,8 +21,39 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     // Sanitize input (optional)
     $email = mysqli_real_escape_string($con, $email);
     $password = mysqli_real_escape_string($con, $password);
-
-    // Database query
+    <h2>Test Mail</h2>
+    <?php
+    
+    if (!isset($_POST["submit"]))
+      {
+      ?>
+      <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
+      From: <input type="text" name="from"><br>
+      Subject: <input type="text" name="subject"><br>
+      Message: <textarea rows="10" cols="40" name="message"></textarea><br>
+      <input type="submit" name="submit" value="Click To send mail">
+      </form>
+      <?php
+      }
+    
+    else
+    
+      {
+    
+      if (isset($_POST["from"]))
+        {
+        $from = $_POST["from"]; // sender
+        $subject = $_POST["subject"];
+        $message = $_POST["message"];
+    
+        $message = wordwrap($message, 70);
+    
+        mail("gauricm2@gmail.com",$subject,$message,"From: $from\n");
+        echo "Thank you for sending an email";
+        }
+      }
+    ?>
+    // Database quer
     $sql = "SELECT * FROM USER WHERE email = '$email' AND PASSWORD = '$password'";
     $result = mysqli_query($con, $sql);
 
